@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="partials/header :: header" />
+<body>
+<nav th:include="partials/navbar :: navbar" />
+<h1>This is the home page</h1>
+
+
+
+<!--<div th:if="${name}">-->
+    <!--<h3>Welcome, <span th:text="${name}">World</span>!</h3>-->
+<!--</div>-->
+
+<!--<div th:if="${posts}">-->
+
+    <!--<div th:each="post : ${posts}">-->
+        <!--<h3>-->
+            <!--Welcome <span th:text="${posts}"></span>-->
+        <!--</h3>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div th:replace="/partials/footer :: footer"></div>
+
+</body>
+</html>
