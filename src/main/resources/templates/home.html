@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="partials/header :: header" />
+<head th:replace="partials/header :: header('This is the home page')"></head>
 <body>
-    <nav th:include="partials/navbar :: navbar" />
-    <h1>This is the home page</h1>
+
+<h1>This is the home page!</h1>
+
+<!-- this will not work... -->
+<!--<br>-->
+
+<!-- ...but this will... -->
+<br />
+
+<!-- context variables -->
+<h3>Well, howdy, <span th:text="${name}"></span>!</h3>
+
+<!-- if and each tags -->
+<!--<div th:if="${willSayHi}">-->
+<!--<div th:each="name : ${names}">-->
+<!--<p>Hi, <span th:text="${name}"></span>!</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div th:if="${!willSayHi}">-->
+<!--<div th:each="name : ${names}">-->
+<!--<p>Bye, <span th:text="${name}"></span>. :(</p>-->
+<!--</div>-->
+<!--</div>-->
 
 
-
-    <div th:if="${name}">
-        <h3>Welcome, <span th:text="${name}">World</span>!</h3>
-    </div>
-
-    <!--<div th:if="${users}">-->
-
-        <!--<div th:each="user : ${users}">-->
-            <!--<h3>-->
-                <!--Welcome <span th:text="${user}"></span>-->
-            <!--</h3>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <div th:replace="/partials/footer :: footer"></div>
+<!-- Partials -->
+<div th:replace="partials/footer :: footer"></div>
 
 </body>
 </html>

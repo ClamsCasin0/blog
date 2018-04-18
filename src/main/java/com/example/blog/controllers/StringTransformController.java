@@ -10,7 +10,7 @@ class StringTransformController {
     @GetMapping("/string/reverse/{string}")
     @ResponseBody
     public String reverseString(@PathVariable String string) {
-        return inPlaceReverse(string);
+        return reversesString(string);
 
     }
 
@@ -24,12 +24,12 @@ class StringTransformController {
     @GetMapping("/string/both/{string}")
     @ResponseBody
     public String capAndRevString(@PathVariable String string) {
-        return inPlaceReverse(string.toUpperCase());
+        return reversesString(string.toUpperCase());
 
     }
 
     //reverses string
-    public static String inPlaceReverse(final String input)
+    public static String reversesString(final String input)
     {
         final StringBuilder builder = new StringBuilder(input);
         int length = builder.length();

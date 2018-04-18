@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
     public class HomeController {
 
@@ -18,20 +21,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
         }
 
 
-
-//    @GetMapping("/hello/{name}")
-//    public String rollDice(@PathVariable String name, Model model) {
-//        model.addAttribute("name", name);
-//        return "hello";
-//    }
-
-
+        @GetMapping("/home/{name}")
+    public String welcomeUser(
+            @PathVariable String name,
+            Model model
+    ) {
+        model.addAttribute("name", name);
+        return "home";
     }
-//    @GetMapping("/")
-//    @ResponseBody
-//    public String sayLandingPage(){
-//        return "This is the landing page!";
-//    }
 
 
+    @GetMapping("/home/users")
+    public String welcomeUsers(Model model) {
+
+        List<String> users = new ArrayList<>();
+
+        users.add("John");
+        users.add("Cindy");
+        users.add("Fred");
+
+        model.addAttribute("users", users);
+        return "home";
+    }
+}
 
