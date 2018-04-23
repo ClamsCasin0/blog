@@ -22,12 +22,12 @@ public class User {
     private String password;
 
 
-//    public user(User copy) {
-//    this.id = id;
-//    this.username = username;
-//    this.email = email;
-//    this.password = password;
-//    }
+    public User(User copy) {
+    this.id = copy.id;
+    this.username = copy.username;
+    this.email = copy.email;
+    this.password = copy.password;
+    }
 
     public User() {
     }
