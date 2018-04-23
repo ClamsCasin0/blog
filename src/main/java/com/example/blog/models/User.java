@@ -1,6 +1,5 @@
 package com.example.blog.models;
 
-import com.sun.tools.javac.util.List;
 
 import javax.persistence.*;
 
