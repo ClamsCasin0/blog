@@ -7,15 +7,31 @@
 
 <main class="container">
 
-    <form th:action="@{/posts/create}" th:method="post" th:object="${newPost}">
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         Title:
         <input th:field="*{title}" />
         <br />
+        <br />
         Description:
-        <input th:field="*{description}">
+        <input th:field="*{description}" />
+        <br />
         <br />
         <input type="submit" />
     </form>
+
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post.postDetails}">
+        Location:
+        <input th:field="*{location}" />
+        <br />
+        <br />
+        Price:
+        <input th:field="*{price}" />
+        <br />
+        <br />
+        <input type="submit" />
+    </form>
+
+
 
 </main>
 

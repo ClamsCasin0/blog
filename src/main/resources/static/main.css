@@ -1,5 +1,6 @@
 main {
     margin-top: 60px;
+    background-color: antiquewhite;
 }
 
 /* Sticky Footer */
@@ -10,12 +11,17 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    background-color: aliceblue;
 }
+.navbar-header{
+
+}
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #222;
+    height: 30px;
+    background-color: bisque;
 }

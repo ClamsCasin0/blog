@@ -9,7 +9,19 @@
     <h1>Post</h1>
 
     <h3><span th:text="${post.title}"></span></h3>
-    <p><span th:text="${post.body}"></span></p>
+    <p><span th:text="${post.description}"></span></p>
+
+    <div th:each="image : ${post.images}">
+        <img width="65%" th:src="${image.path}" />
+    </div>
+    <!--<p><span th:text="${post.postDetails.price}"></span></p>-->
+    <!--<p><span th:text="${post.postDetails.description}"></span></p>-->
+    Price:
+    <p><span th:text="${'$ ' + post.postDetails.price + '0'}"></span></p>
+    Location:
+    <p><span th:text="${post.postDetails.location}"></span></p>
+    <span th:each="category : ${post.categories}" th:text="${category.name + ' '}"></span>
+    <p th:text="${post.user.email}"></p>
 </main>
 
 <div th:replace="partials/footer :: footer"></div>
