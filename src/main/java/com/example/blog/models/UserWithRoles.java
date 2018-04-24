@@ -7,20 +7,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserWithRoles extends User implements UserDetails {
-
     public UserWithRoles(User user) {
         super(user);
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
         }
 
         @Override
-        public boolean isAccountNonExpired() {
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+        String roles = ""; // Since we're not using the authorization part of the component
+            return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
         return true;
         }
+
         @Override
         public boolean isAccountNonLocked() {
         return true;
@@ -30,10 +31,10 @@ public class UserWithRoles extends User implements UserDetails {
         public boolean isCredentialsNonExpired() {
         return true;
         }
+
         @Override
         public boolean isEnabled() {
         return true;
         }
-
 
 }
