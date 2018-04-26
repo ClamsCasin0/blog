@@ -10,10 +10,10 @@ public class PostDetails {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column
     private double price;
 
-    @Column(nullable = false)
+    @Column
     private String location;
 
 

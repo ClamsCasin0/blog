@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+	 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+<form th:fragment="post-form(path, btn)" th:action="${path}" method="POST" th:object="${post}">
+
+    <div class="form-group">
+        <label for="title">Post Title</label>
+        <input id="title" class="form-control" placeholder="Enter post title" type="text" th:field="*{title}" th:value="*{title}" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Post Body</label>
+        <input id="description" class="form-control" placeholder="Enter post" type="text" th:field="*{description}" th:value="*{description}" />
+    </div>
+
+    <button class="btn btn-large btn-success" th:text="${btn}"></button>
+
+</form>
+
+</body>
+</html>

@@ -2,14 +2,16 @@ package com.example.blog.controllers;
 
 
 import com.example.blog.models.Post;
-import com.example.blog.models.PostDetails;
+import com.example.blog.models.User;
 import com.example.blog.repositories.PostRepository;
 import com.example.blog.repositories.UsersRepository;
-import com.example.blog.services.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostController {
@@ -17,7 +19,6 @@ public class PostController {
     private final PostRepository ptDao;
     private final UsersRepository userDao;
 
-    @Autowired
     public PostController(PostRepository ptDao, UsersRepository userDao) {
         this.ptDao = ptDao;
         this.userDao = userDao;
@@ -27,13 +28,11 @@ public class PostController {
     public String index(Model viewAndmodel) {
         Iterable<Post> posts = ptDao.findAll();
         viewAndmodel.addAttribute("posts", posts);
-//        model.addAttribute("posts", ptSvc.getAllPosts());
         return "/posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model viewAndmodel) {
-//        model.addAttribute("post", ptSvc.getPost(id));
         Post post = ptDao.findOne(id);
         viewAndmodel.addAttribute("post", post);
         return "/posts/show";
@@ -48,12 +47,20 @@ public class PostController {
     }
 
 
-
+//FIC THIS
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post) {
-        post.setUser(userDao.findOne((long)3));
-        ptDao.save(post);
-        return "redirect:/posts";
+    public String createPost(@Valid Post post, Errors validation, Model model) {
+
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", post);
+            return "/posts/create";
+        } else {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            post.setUser(loggedInUser);
+            ptDao.save(post);
+            return "redirect:/posts";
+        }
     }
 
 //    @PostMapping("/posts/create/details")
@@ -68,7 +75,15 @@ public class PostController {
         return "/posts/edit";
     }
 
+    @PostMapping("/posts/{id}/edit")
+    public String handleEdit(@PathVariable long id, @ModelAttribute Post post){
+        Post originalPost = ptDao.findOne(id);
+        originalPost.setTitle(post.getTitle());
+        originalPost.setDescription(post.getDescription());
+        ptDao.save(post);
+        return "redirect:/posts";
 
+    }
 
     @PostMapping("/posts/{id}/delete")
     public String delete(@PathVariable long id) {
@@ -76,12 +91,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @PostMapping("/posts/edit")
-    public String handleEdit(@ModelAttribute Post post){
-        ptDao.save(post);
-        return "redirect:/posts";
 
-    }
 
 
 

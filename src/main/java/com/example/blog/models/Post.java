@@ -1,6 +1,9 @@
 package com.example.blog.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -10,19 +13,21 @@ public class Post {
 
     @Id
     @GeneratedValue
-//    @Column(columnDefinition = "UNSIGNED")
     private long id;
 
     @Column(nullable = false)
+    @NotBlank(message="Title cannot be blank.")
+    @Size(max=10, message="Title cannot be longer than 10 characters.")
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @Size(min=10, message="Description must be at least 10 characters long.")
     private String description;
 
 
     //Creates the relationship the users table
     @OneToOne
-//    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 //
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")

@@ -5,40 +5,52 @@
 
 <div th:replace="partials/navbar :: navbar"></div>
 
-<form th:action="@{/logout}" th:method="post">
-    <button class="btn" style="margin-top: 8px">Logout</button>
-</form>
+<!--<form th:action="@{/logout}" th:method="post">-->
+    <!--<button class="btn" style="margin-top: 8px">Logout</button>-->
+<!--</form>-->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+        <h1 class="display-4 text-center">Welcome to <em>AJBlog</em> </h1>
+        <p class="lead text-center">Putting the "AJ" in Agility</p>
+    </div>
+</div>
 
 <main class="container">
 
-    <h1>Posts</h1>
+    <h1 class="text-center">Posts</h1>
 
     <div th:each="post : ${posts}">
 
+
         <!--<h2><a th:href="/posts/show?id=${post.id}">${post.title}</a></h2>-->
 
-        <div th:each="image : ${post.images}">
-            <img width="65%" th:src="${image.path}" />
+        <div class="text-center" th:each="image : ${post.images}">
+            <img width="55%" th:src="${image.path}" />
         </div>
-        Title:
+        <div class="col-md-14 text-center">
+        <!--Title:-->
         <h3><span th:text="${post.title}"></span></h3>
-        Description:
+        <!--Description:-->
         <p><span th:text="${post.description}"></span></p>
-        Price:
-        <p><span th:text="${'$ ' + post.postDetails.price + '0'}"></span></p>
-        Location:
-        <p><span th:text="${post.postDetails.location}"></span></p>
+        <!--Price:-->
+        <!--<p><span th:text="${'$ ' + post.postDetails.price + '0'}"></span></p>-->
+        <!--Location:-->
+        <!--<p><span th:text="${post.postDetails.location}"></span></p>-->
+            <a th:href="@{/posts/{postId}/edit(postId=${post.getId()})}" class="waves-effect waves-light btn">Edit</a>
 
         Post by:
         <p th:text="${post.user.email}"></p>
-        Category:
+        <!--Category:-->
         <span th:each="category : ${post.categories}" th:text="${category.name + ' '}"></span>
-
+        </div>
     </div>
 
 </main>
 
 <div th:replace="partials/footer :: footer"></div>
+
+<div th:replace="partials/scripts :: scripts"></div>
 
 </body>
 </html>

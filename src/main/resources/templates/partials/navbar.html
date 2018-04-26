@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head></head>
 <body>
 <nav th:fragment="navbar">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
+    <nav class="navbar transparent navbar-inverse sticky-top" style="background-color: antiquewhite;">
+
+        <div class=" navbar-inner container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header sticky-top">
                 <a class="navbar-brand" href="/home">AJBLOG</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Login</a></li>
+            <ul class="nav navbar-nav navbar-right sticky-top">
+                <!--<li><a href="/login">Login</a></li>-->
                 <li><a href="/posts">Posts</a></li>
                 <li><a href="/posts/create">Create a Post</a></li>
-                <li><a href="/posts/1/edit">Edit Post</a></li>
-                <li><a href="/sign-up">Sign-up!</a></li>
+                <!--<li><a href="/posts/1/edit">Edit Post</a></li>-->
+                <!--<li><a href="/register">Register with us!</a></li>-->
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/register">Register</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a id="logout" href="#">Logout</a>
+                    <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>
+                </li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
