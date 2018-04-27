@@ -23,7 +23,7 @@
     <div th:each="post : ${posts}">
 
 
-        <!--<h2><a th:href="/posts/show?id=${post.id}">${post.title}</a></h2>-->
+        <!--<h2><a th:href="/posts/?id=${post.id}">${post.title}</a></h2>-->
 
         <div class="text-center" th:each="image : ${post.images}">
             <img width="55%" th:src="${image.path}" />
@@ -37,13 +37,23 @@
         <!--<p><span th:text="${'$ ' + post.postDetails.price + '0'}"></span></p>-->
         <!--Location:-->
         <!--<p><span th:text="${post.postDetails.location}"></span></p>-->
-            <a th:href="@{/posts/{postId}/edit(postId=${post.getId()})}" class="waves-effect waves-light btn">Edit</a>
+            <!--<a th:href="@{/posts/{postId}/edit(postId=${post.getId()})}" class="waves-effect waves-light btn">Edit</a>-->
 
         Post by:
         <p th:text="${post.user.email}"></p>
         <!--Category:-->
         <span th:each="category : ${post.categories}" th:text="${category.name + ' '}"></span>
+            <div th:if="${#authentication.principal.id == post.user.id}">
+                <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="GET">
+                    <button class="btn btn-warning">Edit</button>
+                </form>
+                <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
         </div>
+
+
     </div>
 
 </main>

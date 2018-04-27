@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="partials/header :: header('Show Profile')"></head>
+<body>
+
+<div th:replace="partials/navbar :: navbar"></div>
+
+<main class="container">
+
+    <h1>Personal Profile</h1>
+
+    <h3><span th:text="${user.username}"></span></h3>
+    <p><span th:text="${user.email}"></span></p>
+    <p><span th:text="${user.password}"></span></p>
+
+    <!--<div th:each="image : ${post.images}">-->
+        <!--<img width="65%" th:src="${image.path}" />-->
+    <!--</div>-->
+
+    <!--Price:-->
+    <!--<p><span th:text="${'$ ' + post.postDetails.price + '0'}"></span></p>-->
+    <!--Location:-->
+    <!--<p><span th:text="${post.postDetails.location}"></span></p>-->
+
+    <!--<span th:each="category : ${post.categories}" th:text="${category.name + ' '}"></span>-->
+    <br />
+    <br />
+    <!--<p th:text="${post.user.email}"></p>-->
+
+    <!--<div th:if="${#authentication.principal.id == user.id}">-->
+        <!--<form th:action="@{'/users/' + ${user.id} + '/edit'}" th:method="GET">-->
+            <!--<button class="btn btn-warning">Edit</button>-->
+        <!--</form>-->
+        <!--<form th:action="@{'/users/' + ${user.id} + '/delete'}" th:method="POST">-->
+            <!--<button class="btn btn-danger">Delete</button>-->
+        <!--</form>-->
+    <!--</div>-->
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
+
+<div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>
